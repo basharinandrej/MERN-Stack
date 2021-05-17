@@ -1,10 +1,13 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "mern Minin",
+  "description": "MERN_Minin",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodem app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "basharin_andrej",
   "license": "ISC",
