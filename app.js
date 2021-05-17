@@ -14,7 +14,7 @@ const startConnectInDataBase = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        app.listen(PORT, () => console.log(`Start app on port ${PORT}`))
+        app.listen(PORT, () => console.log(`Start app on port ${PORT}..... `))
     } catch (e) {
         console.log('Ошибка при подключении к БД', e.message);
         process.exit(1)

@@ -72,7 +72,6 @@ router.post('/login',
         )
 
         res.json({token, userId: user.id})
-        // Token
     } catch (e) {
         res.status(500).json({message: e.message})
     }
