@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken')
@@ -13,33 +13,34 @@ router.post('/register',
         check('password', 'Минимальная длина пароля 6 симвлов').isLength({min: 6})
     ],
     async (req, res) => {
-    try {
-        const errors = validationResult(req)
+        try {
+            const errors = validationResult(req)
+            if(!errors.isEmpty()) {
+                res.status(400).json({
+                    'errors': errors.array(),
+                    'message': 'Не корректные данные при регистрации'
+                })
+            }
 
-        if (!errors.isEmpty()) {
-           return res.status(400).json({
-               message: 'Не корректные данные',
-               errors: errors.array()
-           })
+            const {email, password} = req.body
+
+            const candidate = await User.findOne({email})
+            if (candidate) {
+                res.status(400).json({message: 'Такой пользователь есть'})
+            }
+
+            const hashPassword = await bcryptjs.hash(password, 12)
+            const user = new User({email, password: hashPassword})
+            await user.save()
+
+            res.status(200).json({message: 'Пользователь создан'})
+
+        } catch (e) {
+            console.log('e', e);
+            res.status(500).json({message: e})
+            throw Error(e)
         }
-
-        const {email, password} = req.body
-        const candidate = await User.findOne({email})
-        if (candidate) {
-            res.status(400).json({message: 'Пользователь с таким Email есть'})
-        }
-
-        const hashPassword = await bcrypt.hash(password)
-        const user = new User({email, password: hashPassword})
-        await user.save()
-
-        res.status(200).json({message: 'Пользователь создан'})
-
-    } catch (e) {
-        res.status(500).json({message: e.message})
-    }
 })
-
 
 
 router.post('/login',
@@ -57,7 +58,7 @@ router.post('/login',
         const { email, password } = req.body
         const user = await User.findOne(email)
         if (!user) {
-            res.status(400).json({message: 'Такой пользлватель не зарегистрирован'})
+            res.status(400).json({message:  'Такой пользлватель не зарегистрирован'})
         }
 
         const isMatch = bcrypt.compare(password, user.password)
@@ -76,22 +77,5 @@ router.post('/login',
         res.status(500).json({message: e.message})
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router
