@@ -1,0 +1,22 @@
+.auth-page {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.auth-page__title {
+    margin-bottom: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.form__input {
+    margin-bottom: 24px;
+}

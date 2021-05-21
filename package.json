@@ -4,7 +4,7 @@
   "description": "MERN_Minin",
   "main": "index.js",
   "scripts": {
-    "start": "nodem app.js",
+    "start": "node app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -12,12 +12,13 @@
   "author": "basharin_andrej",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.9"
+    "mongoose": "^5.12.9",
+    "typescript": "^4.2.4"
   },
   "devDependencies": {
     "concurrently": "^6.1.0",
