@@ -1,5 +1,6 @@
 {
   "port": "5000",
   "jwtSecret": "superpuperjwtsecretoken",
-  "mongoUrl": "mongodb+srv://admin:admin@cluster0.u8zac.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  "mongoUrl": "mongodb+srv://admin:admin@cluster0.u8zac.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
 }
