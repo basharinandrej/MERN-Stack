@@ -21,7 +21,6 @@ export const useHttp = () => {
                 throw new Error(data.message || 'Error_1')
             }
 
-            console.log(data);
             return data
         } catch (e) {
             setError(e.message)

@@ -1,0 +1,12 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav__btn {
+    margin-left: auto;
+}
+
+.nav__list {
+    margin-left: auto;
+}

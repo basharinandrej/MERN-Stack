@@ -43,7 +43,7 @@ const AuthPade = () => {
                 'POST',
                 {...form}
             )
-            login(data.token, data.userId)
+            login(data.token, data.userId, data.email)
         } catch (e) {}
     }
     return (

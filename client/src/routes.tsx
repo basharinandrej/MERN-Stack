@@ -5,8 +5,8 @@ import CreatePage from "./pages/CreatePage";
 import DetailPage from "./pages/DetailPage";
 import LinksPage from "./pages/LinksPage";
 
-const routes = ( isAuthentication: boolean ) => {
-    if (isAuthentication) {
+const routes = ( isAuthenticated: boolean ) => {
+    if (isAuthenticated) {
        return (
            <Switch>
                <Route path="/create" exact render={() => <CreatePage/>}/>
