@@ -9,9 +9,8 @@ const routes = ( isAuthentication: boolean ) => {
     if (isAuthentication) {
        return (
            <Switch>
-               <Route path="/" exact render={() => <AuthPade/> }/>
-               <Route path="/create" render={() => <CreatePage/>}/>
-               <Route path="/links" render={() => <LinksPage/>}/>
+               <Route path="/create" exact render={() => <CreatePage/>}/>
+               <Route path="/links" exact render={() => <LinksPage/>}/>
                <Route path="/details/:id" render={() => <DetailPage/>}/>
                <Redirect to="/create" />
            </Switch>
@@ -20,7 +19,7 @@ const routes = ( isAuthentication: boolean ) => {
 
     return (
         <Switch>
-            <Route path="/" render={() => <AuthPade/>}/>
+            <Route path="/" exact render={() => <AuthPade/>}/>
             <Redirect to="/" />
         </Switch>
     )

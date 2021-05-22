@@ -56,12 +56,12 @@ router.post('/login',
 
     try {
         const { email, password } = req.body
-        const user = await User.findOne(email)
+        const user = await User.findOne({email})
         if (!user) {
             res.status(400).json({message:  'Такой пользлватель не зарегистрирован'})
         }
 
-        const isMatch = bcrypt.compare(password, user.password)
+        const isMatch = bcryptjs.compare(password, user.password)
         if(!isMatch) {
             res.status(400).json({message: 'Пароль не корректный'})
         }

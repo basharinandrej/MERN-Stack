@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import './AuthPage.css'
 import {useHttp} from "../../hooks/http.hooks";
+import {AuthContext} from "../../context/authContext";
 
 const AuthPade = () => {
+    const {login} = useContext(AuthContext)
     const {request, error, clearError} = useHttp()
     const [form, setForm] = React.useState<object>({})
 
@@ -32,6 +34,18 @@ const AuthPade = () => {
         } catch (e) {}
     }
 
+    const loginHandler = async (e: React.MouseEvent) => {
+        e.preventDefault()
+
+        try {
+            const data = await request(
+                'api/auth/login',
+                'POST',
+                {...form}
+            )
+            login(data.token, data.userId)
+        } catch (e) {}
+    }
     return (
         <div className="auth-page">
             <h1 className="auth-page__title">AuthPage</h1>
@@ -55,6 +69,11 @@ const AuthPade = () => {
                         onClick={clickHandler}
                     >
                         Регистрация
+                    </button>
+                    <button
+                        onClick={loginHandler}
+                    >
+                        Вход
                     </button>
                 </div>
             </form>
